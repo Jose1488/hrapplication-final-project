@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Employee List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee List</h1>
+        <a href="/add-employee" class="button">Add New Employee</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>National ID</th>
+                    <th>Employee Name</th>
+                    <th>Department</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Date of Appointment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.nationalId}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.department}"></td>
+                    <td th:text="${employee.phoneNumber}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${#dates.format(employee.dateOfAppointment, 'yyyy-MM-dd')}"></td>
+                    <td>
+                        <div class="btn-group">
+                            <a th:href="@{/delete-employee/{nationalId}(nationalId=${employee.nationalId})}" class="btn-del">Delete</a>
+                            <a th:href="@{/edit-employee/{nationalId}(nationalId=${employee.nationalId})}" class="btn-edit">Edit</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
